@@ -19,6 +19,7 @@ node_modules/
 .eslintcache
 
 # MacOS system files
+ghjhgjhgj
 .DS_Store
 
 # Windows system files
@@ -29,3 +30,7 @@ $RECYCLE.BIN/
 .idea
 IlluminatedCloud
 .vscode
+
+force-app/main/default/profiles/Custom%3A Marketing Profile.profile-meta.xml
+force-app/main/default/profiles/Custom%3A Sales Profile.profile-meta.xml
+force-app/main/default/profiles/Custom%3A Support Profile.profile-meta.xml

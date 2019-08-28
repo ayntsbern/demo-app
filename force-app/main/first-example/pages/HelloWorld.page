@@ -3,5 +3,5 @@
  -->
 
 <apex:page id="HelloWorld">
-    <h1>This is testpage!</h1>
+    <h1>This is test page!</h1>
 </apex:page>
