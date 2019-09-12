@@ -1,0 +1,90 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+  <apex:includeScript value="{!$Resource.jquery341}"/>
+  <apex:includeScript value="{!$Resource.maskedinput}"/>
+
+  <script type="text/javascript">
+    $(function(){
+      $("#mobile").mask("+7 (999) 999 99 99");
+    });
+  </script>
+  <style>
+        .border {
+            justify-content: center;
+            display: flex;
+            background-color: #FFE033;
+        }
+
+        .border-menu {
+            font-family: Helvetica, sans-serif;
+            font-weight: normal;
+            justify-content: center;
+            display: flex;
+            text-align: left;
+        }
+
+        .container {
+            display: grid;
+            text-align: left;
+        }
+
+        #theButton {
+          text-align:center;
+          background: #FFE033;
+        }
+    </style>
+
+    <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+        <div class="border">
+            <apex:image url="{!URLFOR($Resource.yandexImg, 'image/BecomePartner.png')}"/>
+        </div>
+
+        <input type="hidden" name="oid" value="00D4E0000009jeh"/>
+        <!--<input type=hidden name="retURL" value="http://new-partner"> -->
+        <div class="border-menu">
+            <apex:pageBlock>
+                <table class="container">
+                    <tr>
+                        <td><label for="last_name">Имя</label></td>
+                        <td><input id="last_name" maxlength="80" name="last_name" size="20" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="mobile">Телефон</label></td>
+                        <td><input id="mobile" maxlength="40" name="mobile" size="20" type="text"
+                                   placeholder="+7 (999) 999 99 99"/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Электронная почта</label></td>
+                        <td><input id="email" maxlength="80" name="email" size="20" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="company">Название ресторана</label></td>
+                        <td><input id="company" maxlength="40" name="company" size="20" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="city">Город</label></td>
+                        <td><input id="city" maxlength="40" name="city" size="20" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Адрес (ул., дом):</label></td>
+                        <td><input id="00N4E000004Pazg" maxlength="255" name="00N4E000004Pazg" size="20" type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="url">Сайт ресторана</label></td>
+                        <td><input id="url" maxlength="80" name="url" size="20" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Комментарии:</label></td>
+                        <td><input id="00N4E000004Pazv" maxlength="255" name="00N4E000004Pazv" size="20" type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Согласен:</label></td>
+                        <td><input id="00N4E000004Pb05" name="00N4E000004Pb05" type="checkbox" value="1"/></td>
+                    </tr>
+                </table>
+            </apex:pageBlock>
+        </div>
+      <input type="submit" name="Отправить" id="theButton"/>
+    </form>
+</apex:page>

@@ -37,7 +37,7 @@
 
     <apex:form>
         <div class="border">
-            <apex:image url="{!URLFOR($Resource.yandexImg, 'image/BecomePartner.png')}"/>
+            <apex:image url="{!URLFOR($Resource.yandexImg, 'image/Offer.png')}"/>
         </div>
         <div class="border-menu">
             <apex:pageBlock title="Внесите реквизиты">
@@ -182,6 +182,10 @@
                     </tr>
                 </table>
             </apex:pageBlock>
+
+            <!-- <apex:pageBlockButtons location="bottom">
+                   <apex:commandButton action="{!save}" value="Save"/>
+               </apex:pageBlockButtons> -->
         </div>
     </apex:form>
 </apex:page>
