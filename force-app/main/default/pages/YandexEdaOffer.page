@@ -1,0 +1,187 @@
+<!--
+ - Created by user on 12.09.2019.
+ -->
+
+<apex:page id="YandexEdaOffer" applyHtmlTag="false" applyBodyTag="false"
+           showHeader="false" sidebar="false" standardStylesheets="false"
+           title="Unused Title" controller="YandexEdaOfferController">
+    <style>
+        .border {
+            justify-content: center;
+            display: flex;
+            background-color: #FFE033;
+        }
+
+        .border-menu {
+            font-family: Helvetica, sans-serif;
+            font-weight: normal;
+            border: black solid 1px;
+            justify-content: center;
+            display: flex;
+            text-align: left;
+        }
+
+        .container {
+            display: grid;
+            text-align: left;
+        }
+
+        .subcontainer {
+            font-family: Helvetica, sans-serif;
+        }
+        .subcontainer tr:nth-child(odd){
+            font-size: 8px;
+        }
+
+    </style>
+
+    <apex:form>
+        <div class="border">
+            <apex:image url="{!URLFOR($Resource.yandexImg, 'image/BecomePartner.png')}"/>
+        </div>
+        <div class="border-menu">
+            <apex:pageBlock title="Внесите реквизиты">
+                <table class="container">
+                    <tr>
+                        <td><apex:outputLabel value="Название ресторана" for="theRestName"/></td>
+                        <td><apex:inputField value="{!offer.RestName__c}" id="theRestName"/></td>
+                    </tr>
+                    <tr>
+                        <td><apex:outputLabel value="Полное название предприятия" for="theAccountFullName"/></td>
+                        <td><apex:inputField value="{!offer.AccountFullName__c}" id="theAccountFullName"/></td>
+                    </tr>
+                    <tr>
+                        <td> <apex:outputLabel value="Юридический адрес" for="the"/> </td>
+                        <td>
+                            <table class="subcontainer">
+                                <tr>
+                                    <td><apex:outputLabel value="Город" for="theCity"/> </td>
+                                    <td><apex:outputLabel value="Индекс" for="theIndex"/> </td>
+                                </tr>
+                                <tr>
+                                    <td><apex:inputField value="{!offer.City__c}" id="theCity"/></td>
+                                    <td><apex:inputField value="{!offer.Index__c}" id="theIndex"/></td>
+                                </tr>
+                                <tr>
+                                    <td><apex:outputLabel value="Улица" for="theStreet"/> </td>
+                                    <td><apex:outputLabel value="Дом, офис, кв." for="theApartments"/> </td>
+                                </tr>
+                                <tr>
+                                    <td><apex:inputField value="{!offer.Street__c}" id="theStreet"/></td>
+                                    <td><apex:inputField value="{!offer.Apartments__c}" id="theApartments"/></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="ОГРН" for="theOGRN"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.OGRN__c}" id="theOGRN"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="ИНН" for="theINN"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.INN__c}" id="theINN"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="КПП" for="theKPP"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.KPP__c}" id="theKPP"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="НДС" for="theNDS"/>
+                        </td>
+                        <!--- <td><apex:selectRadio value="{!offer.INN__c}">
+                                    <apex:selectOptions value="{!offer.INN__c}"/>
+                                </apex:selectRadio></td> --->
+                        <td>
+                            <apex:inputField value="{!offer.NDS__c}" id="theNDS"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="Название банка" for="theBankName"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.BankName__c}" id="theBankName"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="Расчетный счет" for="theCheckingAcc"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.CheckingAcc__c}" id="theCheckingAcc"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="БИК банка" for="theBankBIK"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.BankBIK__c}" id="theBankBIK"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="Кор. счет" for="theCorAcc"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.CorAcc__c}" id="theCorAcc"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="Телефон бухгалтерии" for="theAccounting_Phone"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.Accounting_Phone__c}" id="theAccounting_Phone"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="Электронная почта бухгалтерии" for="theAccountingEmail"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.AccountingEmail__c}" id="theAccountingEmail"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="Сайт ресторана" for="theWebsite"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.Website__c}" id="theWebsite"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="Имя подписанта в именительным падеже" for="theSignerName"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.SignerName__c}" id="theSignerName"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputLabel value="Должность подписанта" for="theSignerPosition"/>
+                        </td>
+                        <td>
+                            <apex:inputField value="{!offer.SignerPosition__c}" id="theSignerPosition"/>
+                        </td>
+                    </tr>
+                </table>
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>
