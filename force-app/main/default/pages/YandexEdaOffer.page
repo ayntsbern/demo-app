@@ -5,6 +5,7 @@
 <apex:page id="YandexEdaOffer" applyHtmlTag="false" applyBodyTag="false"
            showHeader="false" sidebar="false" standardStylesheets="false"
            title="Unused Title" controller="YandexEdaOfferController">
+    <apex:includeScript value="{!$Resource.jquery341}"/>
     <style>
         .border {
             justify-content: center;
@@ -34,21 +35,58 @@
         }
 
     </style>
+    <script>
+      // $(document).ready(function() {
+      //   $('#border-menu').submit(function(e) {
+      //     e.preventDefault();
+      //     var rest_name = $('#theRestName').val();
+      //     $(".error").remove();
+      //     if (rest_name.length === 0) {
+      //       $('#theRestName').after('<span class="error">This field is required</span>');
+      //     }
+      //   })
+      // });
+      $(document).ready(function() {
+        console.log("document ready start");
+        var BIK = $("#theBankBIK");
+        console.log("BIK", BIK);
+        $("#theBankBIK").on('input', function(){
+          //$("#error").text("Ввожу данные");
+          var BIK = $("#theBankBIK").val();
+          var filter =/([0-9])/; ///^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if (!filter.test(BIK) ) {
+            //alert('Please provide a valid email address');
+            $("#error").text(BIK+" is not a valid BIK");
+            BIK.focus;
+            //return false;
+          } else {
+            $("#error").text("");
+          }
+        });
+      });
 
+
+
+    </script>
     <apex:form>
         <div class="border">
             <apex:image url="{!URLFOR($Resource.yandexImg, 'image/Offer.png')}"/>
         </div>
         <div class="border-menu">
             <apex:pageBlock title="Внесите реквизиты">
+                <label id="error" style="color: red;"></label>
                 <table class="container">
                     <tr>
                         <td><apex:outputLabel value="Название ресторана" for="theRestName"/></td>
-                        <td><apex:inputField value="{!offer.RestName__c}" id="theRestName"/></td>
+                        <td><apex:inputText value="{!offer.RestName__c}" id="theRestName"/></td>
+                    </tr>
+                    <tr>
+                        <td> <apex:outputLabel value="Название предпрития или ИНН" for="theNameOrINN"/></td>
+                        <td> <apex:inputText id="theNameOrINN"/></td>
                     </tr>
                     <tr>
                         <td><apex:outputLabel value="Полное название предприятия" for="theAccountFullName"/></td>
-                        <td><apex:inputField value="{!offer.AccountFullName__c}" id="theAccountFullName"/></td>
+                        <td><apex:inputText value="{!offer.AccountFullName__c}" id="theAccountFullName"/></td>
                     </tr>
                     <tr>
                         <td> <apex:outputLabel value="Юридический адрес" for="the"/> </td>
@@ -59,16 +97,16 @@
                                     <td><apex:outputLabel value="Индекс" for="theIndex"/> </td>
                                 </tr>
                                 <tr>
-                                    <td><apex:inputField value="{!offer.City__c}" id="theCity"/></td>
-                                    <td><apex:inputField value="{!offer.Index__c}" id="theIndex"/></td>
+                                    <td><apex:inputText value="{!offer.City__c}" id="theCity"/></td>
+                                    <td><apex:inputText value="{!offer.Index__c}" id="theIndex" size="5"/></td>
                                 </tr>
                                 <tr>
                                     <td><apex:outputLabel value="Улица" for="theStreet"/> </td>
                                     <td><apex:outputLabel value="Дом, офис, кв." for="theApartments"/> </td>
                                 </tr>
                                 <tr>
-                                    <td><apex:inputField value="{!offer.Street__c}" id="theStreet"/></td>
-                                    <td><apex:inputField value="{!offer.Apartments__c}" id="theApartments"/></td>
+                                    <td><apex:inputText value="{!offer.Street__c}" id="theStreet"/></td>
+                                    <td><apex:inputText value="{!offer.Apartments__c}" id="theApartments" size="5"/></td>
                                 </tr>
                             </table>
                         </td>
@@ -78,7 +116,7 @@
                             <apex:outputLabel value="ОГРН" for="theOGRN"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.OGRN__c}" id="theOGRN"/>
+                            <apex:inputText value="{!offer.OGRN__c}" id="theOGRN"/>
                         </td>
                     </tr>
                     <tr>
@@ -86,7 +124,7 @@
                             <apex:outputLabel value="ИНН" for="theINN"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.INN__c}" id="theINN"/>
+                            <apex:inputText value="{!offer.INN__c}" id="theINN"/>
                         </td>
                     </tr>
                     <tr>
@@ -94,18 +132,17 @@
                             <apex:outputLabel value="КПП" for="theKPP"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.KPP__c}" id="theKPP"/>
+                            <apex:inputText value="{!offer.KPP__c}" id="theKPP"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <apex:outputLabel value="НДС" for="theNDS"/>
                         </td>
-                        <!--- <td><apex:selectRadio value="{!offer.INN__c}">
-                                    <apex:selectOptions value="{!offer.INN__c}"/>
-                                </apex:selectRadio></td> --->
-                        <td>
-                            <apex:inputField value="{!offer.NDS__c}" id="theNDS"/>
+                        <td><apex:selectRadio id = "theNDS" value="{!offer.INN__c}">
+                                <apex:selectOptions value="{!types}">
+                                </apex:selectOptions>
+                            </apex:selectRadio>
                         </td>
                     </tr>
                     <tr>
@@ -113,7 +150,7 @@
                             <apex:outputLabel value="Название банка" for="theBankName"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.BankName__c}" id="theBankName"/>
+                            <apex:inputText value="{!offer.BankName__c}" id="theBankName"/>
                         </td>
                     </tr>
                     <tr>
@@ -121,7 +158,7 @@
                             <apex:outputLabel value="Расчетный счет" for="theCheckingAcc"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.CheckingAcc__c}" id="theCheckingAcc"/>
+                            <apex:inputText value="{!offer.CheckingAcc__c}" id="theCheckingAcc"/>
                         </td>
                     </tr>
                     <tr>
@@ -129,7 +166,7 @@
                             <apex:outputLabel value="БИК банка" for="theBankBIK"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.BankBIK__c}" id="theBankBIK"/>
+                            <apex:inputText value="{!offer.BankBIK__c}" id="theBankBIK"/>
                         </td>
                     </tr>
                     <tr>
@@ -137,7 +174,7 @@
                             <apex:outputLabel value="Кор. счет" for="theCorAcc"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.CorAcc__c}" id="theCorAcc"/>
+                            <apex:inputText value="{!offer.CorAcc__c}" id="theCorAcc"/>
                         </td>
                     </tr>
                     <tr>
@@ -145,7 +182,7 @@
                             <apex:outputLabel value="Телефон бухгалтерии" for="theAccounting_Phone"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.Accounting_Phone__c}" id="theAccounting_Phone"/>
+                            <apex:inputText value="{!offer.Accounting_Phone__c}" id="theAccounting_Phone"/>
                         </td>
                     </tr>
                     <tr>
@@ -153,7 +190,7 @@
                             <apex:outputLabel value="Электронная почта бухгалтерии" for="theAccountingEmail"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.AccountingEmail__c}" id="theAccountingEmail"/>
+                            <apex:inputText value="{!offer.AccountingEmail__c}" id="theAccountingEmail"/>
                         </td>
                     </tr>
                     <tr>
@@ -161,7 +198,7 @@
                             <apex:outputLabel value="Сайт ресторана" for="theWebsite"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.Website__c}" id="theWebsite"/>
+                            <apex:inputText value="{!offer.Website__c}" id="theWebsite"/>
                         </td>
                     </tr>
                     <tr>
@@ -169,7 +206,7 @@
                             <apex:outputLabel value="Имя подписанта в именительным падеже" for="theSignerName"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.SignerName__c}" id="theSignerName"/>
+                            <apex:inputText value="{!offer.SignerName__c}" id="theSignerName"/>
                         </td>
                     </tr>
                     <tr>
@@ -177,15 +214,16 @@
                             <apex:outputLabel value="Должность подписанта" for="theSignerPosition"/>
                         </td>
                         <td>
-                            <apex:inputField value="{!offer.SignerPosition__c}" id="theSignerPosition"/>
+                            <apex:inputText value="{!offer.SignerPosition__c}" id="theSignerPosition"/>
                         </td>
                     </tr>
                 </table>
+                <apex:pageBlockButtons location="bottom" >
+                    <apex:commandButton action="{!submit}" value="submit"/>
+                </apex:pageBlockButtons>
             </apex:pageBlock>
 
-            <!-- <apex:pageBlockButtons location="bottom">
-                   <apex:commandButton action="{!save}" value="Save"/>
-               </apex:pageBlockButtons> -->
+
         </div>
     </apex:form>
 </apex:page>
