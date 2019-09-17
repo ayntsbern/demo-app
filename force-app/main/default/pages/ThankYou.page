@@ -1,0 +1,29 @@
+<!--
+ - Created by user on 16.09.2019.
+ -->
+
+<apex:page id="ThankYou" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false"
+           showHeader="false" sidebar="false"
+           title="Unused Title">
+    <style>
+        .border {
+            justify-content: center;
+            display: flex;
+        }
+
+        .container {
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+        }
+    </style>
+    <apex:form>
+        <div class="border">
+            <apex:image url="{!URLFOR($Resource.yandexImg, 'image/ThankYou.png')}"/>
+        </div>
+        <div class="container">
+            Спасибо!<br/>
+            С Вами свяжется представитель команды Яндекс.Еда!
+        </div>
+    </apex:form>
+</apex:page>

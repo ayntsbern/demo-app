@@ -76,9 +76,19 @@
           else $(this).removeClass("error");
         });
 
-        $("form").submit(function(event) {
-          event.preventDefault();
-        })
+        $("form").submit(function() {
+          if(!$("#00N4E000004Pb05").is(':checked')){
+            alert("Невозможно продолжить без согласия с условиями");
+            return false;
+          }
+
+          if($("#last_name").val() === '' || $("#email").val() === ''
+            || $("#company").val() === '' || $("#mobile").val() === ''
+            || $("#address").val() === '' || $("#city").val() === ''){
+            alert("Не все обязательные(*) поля заполнены");
+            return false;
+          }
+        });
       });
 
       // $(document).ready(function() {
@@ -124,6 +134,11 @@
         #theButton {
             text-align: center;
             background: #FFE033;
+            margin: 4px 2px;
+            border-radius: 4px;
+            border: 1px solid #cccccc;
+            font-size: 16px;
+
         }
         .error{
              outline: 1px solid red;
@@ -140,7 +155,8 @@
         </div>
 
         <input type="hidden" name="oid" value="00D4E0000009jeh"/>
-        <!--<input type=hidden name="retURL" value="http://new-partner"> -->
+        <input type="hidden" name="retURL" value="https://sandbox-ayntsbern-developer-edition.cs83.force.com/newpartner/ThankYou"/>
+
         <div class="border-menu">
             <apex:pageBlock>
                 <table class="container">
@@ -187,7 +203,12 @@
                         <td><label for="url">Сайт ресторана</label></td>
                         <td><input id="url" maxlength="80" name="url" size="20" type="text"/></td>
                     </tr>
-                    <tr><td></td><td></td></tr>
+                    <tr><td></td>
+                        <td>
+                            Если нет сайта, можете добавить ссылку на
+                            страницу в социальной сети
+                        </td>
+                    </tr>
                     <tr>
                         <td><label>Комментарии</label></td>
                         <td><input id="00N4E000004Pazv" maxlength="255" name="00N4E000004Pazv" size="20" type="text"/>
@@ -195,12 +216,24 @@
                     </tr>
                     <tr><td></td><td></td></tr>
                     <tr>
-                        <td><label>Согласен</label></td>
-                        <td><input id="00N4E000004Pb05" name="00N4E000004Pb05" type="checkbox" value="1"/></td>
+                        <td><label>*</label><input id="00N4E000004Pb05" name="00N4E000004Pb05" type="checkbox" value="1"/>
+                        <label>Согласен</label></td>
                     </tr>
+
                 </table>
             </apex:pageBlock>
         </div>
-        <input type="submit" name="Отправить" id="theButton"/>
+        <div style="font-family: Helvetica, sans-serif; text-align: center; margin-top: 12px; font-size: 12px;">
+            <div style="width: 400px; font-size: 10px; text-align: left; ">
+                Я даю ООО "Яндекс" и ООО "Яндекс.Еда" согласие на обработку моих
+                персональных данных в соответствии с Федеральным Законом от 27.07.2008 года
+                N152-ФЗ "О персональных данных" на условиях и для целей, определенных в этой
+                заявке и в Политике конфиденциальности, -yandex.ru/legal/confidential-
+                ознакомление с которой я подтверждаю, в течение срока, необходимого для
+                    достижения указанных целей, и 5 лет после их достижения.</div><br/>
+            <input type="submit" name="Отправить" id="theButton" title="Отправить" value="Отправить"/> <br/>
+            <label>© 2019 Яндекс</label>
+        </div>
+
     </form>
 </apex:page>

@@ -4,6 +4,8 @@
 
 public with sharing class YandexEdaOfferController {
     public Offer__c offer{get; set;}
+    public Boolean value {get; set;}
+    public Boolean valueForYes {get; set;}
 
     public List<SelectOption> getTypes(){
         Schema.SObjectType sobject_type = Offer__c.getSObjectType();
@@ -17,7 +19,17 @@ public with sharing class YandexEdaOfferController {
             options.add(new SelectOption(p.getLabel(), p.getValue()));
         return options;
     }
+
+    public String getOrgInfo(String smthing){
+        return smthing;
+    }
+
+
     public void submit(){
 
+    }
+
+    public PageReference save(){
+        return null;
     }
 }
