@@ -2,6 +2,90 @@
  - Created by user on 17.09.2019.
  -->
 
-<aura:component description="YandexEdaCreateOffer" implements="force:lightningQuickAction">
-    
+<aura:component description="YandexEdaCreateOffer" implements="force:lightningQuickActionWithoutHeader, force:hasRecordId"
+                controller="YandexEdaCreateOfferController" access="global">
+
+
+    <!-- attributes -->
+    <aura:attribute name="tableRows" type="Contact[]"/>
+
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <h4 class="title slds-text-heading--medium" >Создание оферты</h4>
+    </div>
+
+
+    <!-- the container element determine the height of the datatable -->
+    <div class="slds-modal__content slds-p-around--x-small slds-align_absolute-center slds-size_1-of-1 slds-is-relative" aura:id="modalbody" id="modalbody">
+
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+            <tr class="slds-line-height_reset">
+                <th class="slds-text-align_right" scope="col" style="width:3.25rem">
+                    <div class="slds-truncate slds-assistive-text" id="column-group-header"></div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Контакт">Контакт</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Ресторан">Ресторан</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Email">Email</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <aura:if isTrue="{!!empty(v.tableRows)}">
+                <aura:iteration items="{!v.tableRows}" var="contacts">
+                    <tr class="slds-hint-parent">
+                        <td class="slds-text-align_right" role="gridcell">
+                        <span class="slds-radio">
+                        <input type="radio" id="radio-01" value="radio-01" name="options" tabindex="-1"
+                               aria-labelledby="radio-button-label-01 column-group-header"/>
+                            <label class="slds-radio__label" for="radio-01" id="radio-button-label-01">
+                                <span class="slds-radio_faux"></span>
+                                <span class="slds-form-element__label slds-assistive-text">Select item 1</span>
+                            </label>
+                        </span>
+                        </td>
+                        <th>
+                            <div class="slds-truncate">{!contacts.Name}</div>
+                        </th>
+                        <td>
+                            <div class="slds-truncate">{!contacts.Account.Name}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{!contacts.Email}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </aura:if>
+            </tbody>
+        </table>
+    </div>
+    <!-- MODAL FOOTER -->
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <div class="forceChangeRecordTypeFooter">
+            <ui:button class="slds-button slds-button_neutral"
+                       label="Cancel" press="{! c.cancel}" />
+            <ui:button class="slds-button slds-button--brand"
+                       label="Save" press="{!c.save}"/>
+        </div>
+        <aura:html tag="style">
+            .cuf-content {
+            padding: 0 0rem !important;
+            }
+            .slds-p-around--medium {
+            padding: 0rem !important;
+            }
+            .slds-modal__content{
+            overflow-y:hidden !important;
+            height:unset !important;
+            max-height:unset !important;
+            }
+        </aura:html>
+    </div>
 </aura:component>
