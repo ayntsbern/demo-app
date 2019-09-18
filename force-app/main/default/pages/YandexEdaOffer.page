@@ -121,12 +121,6 @@
           }
         });
 
-        function join(arr /*, separator */) {
-          var separator = arguments.length > 1 ? arguments[1] : ", ";
-          return arr.filter(function(n) {
-            return n
-          }).join(separator);
-        }
 
         $('[id*=theValue]').click(function(){
           if($("[id*=theValue]").prop("checked") === true){
