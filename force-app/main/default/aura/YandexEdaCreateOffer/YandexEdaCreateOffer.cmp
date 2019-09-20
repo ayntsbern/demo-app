@@ -12,7 +12,8 @@
     <aura:attribute name="columns" type="List"/>
     <aura:attribute name="hasErrors" type="Boolean"/>
     <aura:attribute name="hasConfirm" type="Boolean"/>
-    <aura:attribute name="currIdContact" type="String"/>
+    <aura:attribute name="currIDContact" type="String"/>
+    <aura:attribute name="offerLink" type="String"/>
 
     <!-- handlers-->
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
@@ -33,24 +34,24 @@
     </div>
 
     <aura:if isTrue="{!v.hasErrors}">
-            <ui:message title="Ошибка" severity="error" closable="true">
+            <ui:message title="Ошибка" severity="error">
                 Оферта для текущей огранизации уже была создана
             </ui:message>
     </aura:if>
 
     <aura:if isTrue="{!v.hasConfirm}">
-            <ui:message title="Успех" severity="confirm" closable="true">
-                Оферта успешно отправлена контакту
+            <ui:message title="Успех" severity="confirm">
+                Оферта успешно отправлена контакту.
             </ui:message>
     </aura:if>
 
     <!-- MODAL FOOTER -->
     <div class="modal-footer slds-modal__footer slds-size_1-of-1">
         <div class="forceChangeRecordTypeFooter">
-            <ui:button class="slds-button slds-button_neutral"
-                       label="Cancel" press="{! c.cancel}"/>
             <ui:button class="slds-button slds-button--brand"
                        label="Отправить офер" press="{!c.createNewOffer}"/>
+            <ui:button class="slds-button slds-button_neutral"
+                       label="Cancel" press="{! c.cancel}"/>
         </div>
         <aura:html tag="style">
             .cuf-content {

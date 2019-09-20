@@ -105,21 +105,22 @@
           }
         });
 
-        $("[id*=myForm]").submit(function() {
+         $("[id*=myForm]").submit(function() {
           if (!$("[id*=theForYes]").is(':checked')) {
             alert("Невозможно продолжить без согласия с условиями");
             return false;
           }
 
-          if ($("[id*=theRestName]").val() === '' || $("[id*=theNameOrINN]").val() === ''
-            || $("[id*=theBankName]").val() === '' || $("[id*=theCheckingAcc]").val() === ''
-            || $("[id*=theAccountingPhone]").val() === '' || $("[id*=theAccountingEmail]").val() === ''
-            || $("[id*=theWebsite]").val() === '' || $("[id*=BillingIndex]").val() === ''
-            || $("[id*=BillingCity]").val() === '' || $("[id*=BillingAddress]").val() === '') {
+          if ($("[id*=theRestName]").val() === '' | $("[id*=theNameOrINN]").val() === ''
+            | $("[id*=theBankName]").val() === '' | $("[id*=theCheckingAcc]").val() === ''
+            | $("[id*=theAccountingPhone]").val() === '' | $("[id*=theAccountingEmail]").val() === ''
+            | $("[id*=theWebsite]").val() === '' | $("[id*=BillingIndex]").val() === ''
+            | $("[id*=BillingCity]").val() === '' | $("[id*=BillingAddress]").val() === '') {
             alert("Не все поля заполнены");
             return false;
           }
-        });
+           $("[id*=theButton]").attr("hidden", true);
+         });
 
 
         $('[id*=theValue]').click(function(){
@@ -152,7 +153,7 @@
                             <apex:outputLabel value="Название ресторана" for="theRestName"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.RestName__c}" id="theRestName"/>
+                            <apex:input value="{!RestName}" id="theRestName"/>
                         </td>
                     </tr>
                     <tr>
@@ -160,7 +161,7 @@
                             <apex:outputLabel value="Название предпрития или ИНН" for="theNameOrINN"/>
                         </td>
                         <td>
-                            <apex:inputText id="theNameOrINN" style="width: auto;"/>
+                            <apex:input id="theNameOrINN" style="width: auto;"/>
                         </td>
                     </tr>
                     <tr>
@@ -168,8 +169,8 @@
                             <apex:outputLabel value="Полное название предприятия" for="theAccountFullName"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.AccountFullName__c}" id="theAccountFullName"
-                                            disabled="true"/>
+                            <apex:input value="{!AccountFullName}" id="theAccountFullName"
+                                            style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                         </td>
                     </tr>
                     <tr>
@@ -188,11 +189,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <apex:inputText value="{!offer.City__c}" id="theCity" disabled="true"/>
+                                        <apex:input value="{!City}" id="theCity"
+                                                    style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                                     </td>
                                     <td>
-                                        <apex:inputText value="{!offer.Index__c}" id="theIndex" size="5"
-                                                        disabled="true"/>
+                                        <apex:input value="{!Index}" id="theIndex" size="5"
+                                                    style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -205,11 +207,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <apex:inputText value="{!offer.Street__c}" id="theStreet" disabled="true"/>
+                                        <apex:input value="{!Street}" id="theStreet"
+                                                    style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                                     </td>
                                     <td>
-                                        <apex:inputText value="{!offer.Apartments__c}" id="theApartments" size="5"
-                                                        disabled="true"/>
+                                        <apex:input value="{!Apartments}" id="theApartments" size="5"
+                                                    style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                                     </td>
                                 </tr>
                             </table>
@@ -220,7 +223,8 @@
                             <apex:outputLabel value="ОГРН" for="theOGRN"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.OGRN__c}" id="theOGRN" disabled="true"/>
+                            <apex:input value="{!OGRN}" id="theOGRN"
+                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                         </td>
                     </tr>
                     <tr>
@@ -228,7 +232,8 @@
                             <apex:outputLabel value="ИНН" for="theINN"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.INN__c}" id="theINN" disabled="true"/>
+                            <apex:input value="{!INN}" id="theINN"
+                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                         </td>
                     </tr>
                     <tr>
@@ -236,7 +241,8 @@
                             <apex:outputLabel value="КПП" for="theKPP"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.KPP__c}" id="theKPP" disabled="true"/>
+                            <apex:input value="{!KPP}" id="theKPP"
+                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                         </td>
                     </tr>
                     <tr>
@@ -244,7 +250,7 @@
                             <apex:outputLabel value="НДС" for="theNDS"/>
                         </td>
                         <td>
-                                <apex:selectRadio id="theNDS" value="{!offer.INN__c}" layout="pageDirection"
+                                <apex:selectRadio id="theNDS" value="{!NDS}" layout="pageDirection"
                                 style="font-size: 12px; border: 1px solid rgb(235, 235, 228); width: 160px;">
                                     <apex:selectOptions value="{!types}"/>
                                 </apex:selectRadio>
@@ -255,7 +261,7 @@
                             <apex:outputLabel value="Название банка" for="theBankName"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.BankName__c}" id="theBankName"
+                            <apex:input value="{!BankName}" id="theBankName"
                                             style="width: auto;"/>
                         </td>
                     </tr>
@@ -264,8 +270,7 @@
                             <apex:outputLabel value="Расчетный счет" for="theCheckingAcc"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.CheckingAcc__c}" id="theCheckingAcc"
-                                            maxlength="20"/>
+                            <apex:input value="{!CheckingAcc}" id="theCheckingAcc" size="20"/>
                         </td>
                     </tr>
                     <tr>
@@ -273,7 +278,8 @@
                             <apex:outputLabel value="БИК банка" for="theBankBIK"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.BankBIK__c}" id="theBankBIK" disabled="true"/>
+                            <apex:input value="{!BankBIK}" id="theBankBIK"
+                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                         </td>
                     </tr>
                     <tr>
@@ -281,7 +287,8 @@
                             <apex:outputLabel value="Кор. счет" for="theCorAcc"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.CorAcc__c}" id="theCorAcc" disabled="true"/>
+                            <apex:input value="{!CorAcc}" id="theCorAcc" disabled="true"
+                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                         </td>
                     </tr>
                     <tr>
@@ -289,8 +296,7 @@
                             <apex:outputLabel value="Телефон бухгалтерии" for="theAccountingPhone"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.Accounting_Phone__c}" id="theAccountingPhone"
-                                            html-placeholder="+7 (999) 999 99 99"/>
+                            <apex:input value="{!Accounting_Phone}" id="theAccountingPhone" html-placeholder="+7 (999) 999 99 99"/>
                         </td>
                     </tr>
                     <tr>
@@ -298,7 +304,7 @@
                             <apex:outputLabel value="Электронная почта бухгалтерии" for="theAccountingEmail"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.AccountingEmail__c}" id="theAccountingEmail"/>
+                            <apex:input value="{!AccountingEmail}" id="theAccountingEmail"/>
                         </td>
                     </tr>
                     <tr>
@@ -306,7 +312,7 @@
                             <apex:outputLabel value="Сайт ресторана" for="theWebsite"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.Website__c}" id="theWebsite"/>
+                            <apex:input value="{!Website}" id="theWebsite"/>
                         </td>
                     </tr>
                     <tr>
@@ -323,7 +329,7 @@
                             <apex:outputLabel for="BillingIndex" value="Индекс"/>
                         </td>
                         <td>
-                            <apex:inputText id="BillingIndex" value="{!offer.BillingIndex__c}"/>
+                            <apex:input id="BillingIndex" value="{!BillingIndexStr}"/>
                         </td>
                     </tr>
                     <tr>
@@ -331,7 +337,7 @@
                             <apex:outputLabel for="BillingCity" value="Город"/>
                         </td>
                         <td>
-                            <apex:inputText id="BillingCity" value="{!offer.BillingCity__c}"/>
+                            <apex:inputText id="BillingCity" value="{!BillingCityStr}"/>
                         </td>
                     </tr>
                     <tr>
@@ -339,7 +345,7 @@
                             <apex:outputLabel for="BillingAddress" value="Адрес"/>
                         </td>
                         <td>
-                            <apex:inputText id="BillingAddress" value="{!offer.BillingAddress__c}"/>
+                            <apex:inputText id="BillingAddress" value="{!BillingAddressStr}"/>
                         </td>
                     </tr>
                     <tr>
@@ -347,7 +353,8 @@
                             <apex:outputLabel value="Имя подписанта в именительным падеже" for="theSignerName"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.SignerName__c}" id="theSignerName" disabled="true"/>
+                            <apex:inputText value="{!SignerName}" id="theSignerName"
+                                            style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                         </td>
                     </tr>
                     <tr>
@@ -355,7 +362,8 @@
                             <apex:outputLabel value="Должность подписанта" for="theSignerPosition"/>
                         </td>
                         <td>
-                            <apex:inputText value="{!offer.SignerPosition__c}" id="theSignerPosition" disabled="true"/>
+                            <apex:inputText value="{!SignerPosition}" id="theSignerPosition"
+                                            style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
                         </td>
                     </tr>
                 </table>
@@ -363,10 +371,14 @@
                     <apex:inputCheckbox value="{!valueForYes}" id="theForYes"/>
                     Подтверждаю свое ознакомление и соглашаюсь с условиями
                     <div class="button">
-                        <apex:commandButton styleClass="yel-but" action="{!save}" value="Отправить"/>
+                        <!-- <apex:actionRegion > -->
+                            <apex:commandButton styleClass="yel-but" action="{!save}" value="Отправить"
+                                                id="theButton"/>   <!-- reRender="block" -->
+                        <!-- </apex:actionRegion> -->
                     </div>
                     <apex:outputLabel>© 2019 Яндекс</apex:outputLabel>
                 </div>
+                <apex:pageMessages />
             </apex:pageBlock>
         </div>
     </apex:form>

@@ -45,6 +45,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>YandexEdaCreateOfferController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>YandexEdaCreateOfferControllerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>YandexEdaOfferController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -341,6 +349,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Offer__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Offer__c.Street__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -505,6 +518,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>StdExceptionTemplate</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>ThankYou</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
