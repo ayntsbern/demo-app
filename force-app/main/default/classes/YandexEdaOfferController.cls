@@ -29,25 +29,22 @@ public with sharing class YandexEdaOfferController {
     public String BillingAddressStr {get;set;}
     public String SignerName {get;set;}
     public String SignerPosition {get;set;}
+    public Boolean hasChanged {get; set;}
 
 
     public YandexEdaOfferController() {
-
         String accId = ApexPages.currentPage().getParameters().get('id');
-        System.debug('>>>>>>>>> Account from url = ' + accId);
         Account account = [
                 SELECT Offer_Name__c
                 FROM Account
                 WHERE Id = :accId
         ];
-        System.debug('>>>>>>>>> Account ID = ' + account.Id);
-        System.debug('>>>>>>>>> Offer name = ' + account.Offer_Name__c);
         offer = [
                 SELECT RestName__c, AccountFullName__c, City__c, Index__c, Street__c,
                         Apartments__c, OGRN__c, INN__c, KPP__c, NDS__c, BankName__c,
                         CheckingAcc__c, BankBIK__c, CorAcc__c, Accounting_Phone__c,
                         AccountingEmail__c, Website__c, BillingIndex__c, BillingCity__c,
-                        BillingAddress__c, SignerName__c, SignerPosition__c
+                        BillingAddress__c, SignerName__c, SignerPosition__c, Changed__c
                 FROM Offer__c
                 WHERE Id = :account.Offer_Name__c
         ];
@@ -73,6 +70,7 @@ public with sharing class YandexEdaOfferController {
         BillingAddressStr = offer.BillingAddress__c;
         SignerName = offer.SignerName__c;
         SignerPosition = offer.SignerPosition__c;
+        hasChanged = offer.Changed__c;
     }
 
     public List<SelectOption> getTypes() {
@@ -111,8 +109,17 @@ public with sharing class YandexEdaOfferController {
         offer.BillingAddress__c = BillingAddressStr;
         offer.SignerName__c = SignerName;
         offer.SignerPosition__c = SignerPosition;
-
-        update offer;
-        return null;
+        offer.Changed__c = true;
+        try{
+            update offer;
+            PageReference thank = new PageReference('/ThankYou');
+            thank.setRedirect(true);
+            return thank;
+        } catch (Exception e){
+            PageReference error = new PageReference('/Exception');
+            ApexPages.addMessages(e);
+            error.setRedirect(true);
+            return error;
+        }
     }
 }

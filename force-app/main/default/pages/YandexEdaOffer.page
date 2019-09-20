@@ -65,6 +65,7 @@
       });
 
       $(document).ready(function() {
+
         $("input[id*=theNameOrINN]").suggestions({
           token: token,
           type: "PARTY",
@@ -105,7 +106,7 @@
           }
         });
 
-         $("[id*=myForm]").submit(function() {
+        $("[id*=myForm]").submit(function() {
           if (!$("[id*=theForYes]").is(':checked')) {
             alert("Невозможно продолжить без согласия с условиями");
             return false;
@@ -119,19 +120,19 @@
             alert("Не все поля заполнены");
             return false;
           }
-           $("[id*=theButton]").attr("hidden", true);
-         });
+          $("[id*=theButton]").attr("hidden", true);
+        });
 
 
-        $('[id*=theValue]').click(function(){
-          if($("[id*=theValue]").prop("checked") === true){
+        $('[id*=theValue]').click(function() {
+          if ($("[id*=theValue]").prop("checked") === true) {
             $("input[id*=BillingCity]").val($("input[id*=theCity]").val());
             $("input[id*=BillingIndex]").val($("input[id*=theIndex]").val());
             $("input[id*=BillingAddress]").val(
-                                              $("input[id*=theStreet]").val() + ', ' +
-                                              $("input[id*=theApartment]").val()
+              $("input[id*=theStreet]").val() + ', ' +
+              $("input[id*=theApartment]").val()
             );
-          } else if($("[id*=theValue]").prop("checked") === false) {
+          } else if ($("[id*=theValue]").prop("checked") === false) {
             $("input[id*=BillingCity]").val("");
             $("input[id*=BillingIndex]").val("");
             $("input[id*=BillingAddress]").val("");
@@ -144,242 +145,248 @@
         <div class="border">
             <apex:image url="{!URLFOR($Resource.yandexImg, 'image/Offer.png')}"/>
         </div>
-        <div class="border-menu">
-            <apex:pageBlock title="Внесите реквизиты">
-                <label id="error" style="color: red;"></label>
-                <table class="container">
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Название ресторана" for="theRestName"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!RestName}" id="theRestName"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Название предпрития или ИНН" for="theNameOrINN"/>
-                        </td>
-                        <td>
-                            <apex:input id="theNameOrINN" style="width: auto;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Полное название предприятия" for="theAccountFullName"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!AccountFullName}" id="theAccountFullName"
+        <div class="offer-page" style= "display: {!If(hasChanged ,'none','') }">
+            <div class="border-menu">
+                <apex:pageBlock title="Внесите реквизиты">
+                    <label id="error" style="color: red;"></label>
+                    <table class="container">
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Название ресторана" for="theRestName"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!RestName}" id="theRestName"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Название предпрития или ИНН" for="theNameOrINN"/>
+                            </td>
+                            <td>
+                                <apex:input id="theNameOrINN" style="width: auto;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Полное название предприятия" for="theAccountFullName"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!AccountFullName}" id="theAccountFullName"
                                             style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Юридический адрес" for="the"/>
-                        </td>
-                        <td>
-                            <table class="subcontainer">
-                                <tr>
-                                    <td>
-                                        <apex:outputLabel value="Город" for="theCity"/>
-                                    </td>
-                                    <td>
-                                        <apex:outputLabel value="Индекс" for="theIndex"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <apex:input value="{!City}" id="theCity"
-                                                    style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                                    </td>
-                                    <td>
-                                        <apex:input value="{!Index}" id="theIndex" size="5"
-                                                    style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <apex:outputLabel value="Улица" for="theStreet"/>
-                                    </td>
-                                    <td>
-                                        <apex:outputLabel value="Дом, офис, кв." for="theApartments"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <apex:input value="{!Street}" id="theStreet"
-                                                    style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                                    </td>
-                                    <td>
-                                        <apex:input value="{!Apartments}" id="theApartments" size="5"
-                                                    style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="ОГРН" for="theOGRN"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!OGRN}" id="theOGRN"
-                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="ИНН" for="theINN"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!INN}" id="theINN"
-                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="КПП" for="theKPP"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!KPP}" id="theKPP"
-                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="НДС" for="theNDS"/>
-                        </td>
-                        <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Юридический адрес" for="the"/>
+                            </td>
+                            <td>
+                                <table class="subcontainer">
+                                    <tr>
+                                        <td>
+                                            <apex:outputLabel value="Город" for="theCity"/>
+                                        </td>
+                                        <td>
+                                            <apex:outputLabel value="Индекс" for="theIndex"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <apex:input value="{!City}" id="theCity"
+                                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
+                                        </td>
+                                        <td>
+                                            <apex:input value="{!Index}" id="theIndex" size="5"
+                                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <apex:outputLabel value="Улица" for="theStreet"/>
+                                        </td>
+                                        <td>
+                                            <apex:outputLabel value="Дом, офис, кв." for="theApartments"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <apex:input value="{!Street}" id="theStreet"
+                                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
+                                        </td>
+                                        <td>
+                                            <apex:input value="{!Apartments}" id="theApartments" size="5"
+                                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="ОГРН" for="theOGRN"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!OGRN}" id="theOGRN"
+                                            style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="ИНН" for="theINN"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!INN}" id="theINN"
+                                            style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="КПП" for="theKPP"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!KPP}" id="theKPP"
+                                            style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="НДС" for="theNDS"/>
+                            </td>
+                            <td>
                                 <apex:selectRadio id="theNDS" value="{!NDS}" layout="pageDirection"
-                                style="font-size: 12px; border: 1px solid rgb(235, 235, 228); width: 160px;">
+                                                  style="font-size: 12px; border: 1px solid rgb(235, 235, 228); width: 160px;">
                                     <apex:selectOptions value="{!types}"/>
                                 </apex:selectRadio>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Название банка" for="theBankName"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!BankName}" id="theBankName"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Название банка" for="theBankName"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!BankName}" id="theBankName"
                                             style="width: auto;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Расчетный счет" for="theCheckingAcc"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!CheckingAcc}" id="theCheckingAcc" size="20"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="БИК банка" for="theBankBIK"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!BankBIK}" id="theBankBIK"
-                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Кор. счет" for="theCorAcc"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!CorAcc}" id="theCorAcc" disabled="true"
-                                        style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Телефон бухгалтерии" for="theAccountingPhone"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!Accounting_Phone}" id="theAccountingPhone" html-placeholder="+7 (999) 999 99 99"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Электронная почта бухгалтерии" for="theAccountingEmail"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!AccountingEmail}" id="theAccountingEmail"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Сайт ресторана" for="theWebsite"/>
-                        </td>
-                        <td>
-                            <apex:input value="{!Website}" id="theWebsite"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Адрес для корреспонденции"/>
-                        </td>
-                        <td>
-                            <apex:inputCheckbox value="{!value}" id="theValue"/>
-                            <apex:outputLabel style="font-size: 12px;" value="Совпадает с юридическим" for="theValue"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel for="BillingIndex" value="Индекс"/>
-                        </td>
-                        <td>
-                            <apex:input id="BillingIndex" value="{!BillingIndexStr}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel for="BillingCity" value="Город"/>
-                        </td>
-                        <td>
-                            <apex:inputText id="BillingCity" value="{!BillingCityStr}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel for="BillingAddress" value="Адрес"/>
-                        </td>
-                        <td>
-                            <apex:inputText id="BillingAddress" value="{!BillingAddressStr}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Имя подписанта в именительным падеже" for="theSignerName"/>
-                        </td>
-                        <td>
-                            <apex:inputText value="{!SignerName}" id="theSignerName"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Расчетный счет" for="theCheckingAcc"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!CheckingAcc}" id="theCheckingAcc" size="20"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="БИК банка" for="theBankBIK"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!BankBIK}" id="theBankBIK"
                                             style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputLabel value="Должность подписанта" for="theSignerPosition"/>
-                        </td>
-                        <td>
-                            <apex:inputText value="{!SignerPosition}" id="theSignerPosition"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Кор. счет" for="theCorAcc"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!CorAcc}" id="theCorAcc" disabled="true"
                                             style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
-                        </td>
-                    </tr>
-                </table>
-                <div class="footer">
-                    <apex:inputCheckbox value="{!valueForYes}" id="theForYes"/>
-                    Подтверждаю свое ознакомление и соглашаюсь с условиями
-                    <div class="button">
-                        <!-- <apex:actionRegion > -->
-                            <apex:commandButton styleClass="yel-but" action="{!save}" value="Отправить"
-                                                id="theButton"/>   <!-- reRender="block" -->
-                        <!-- </apex:actionRegion> -->
-                    </div>
-                    <apex:outputLabel>© 2019 Яндекс</apex:outputLabel>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Телефон бухгалтерии" for="theAccountingPhone"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!Accounting_Phone}" id="theAccountingPhone"
+                                            html-placeholder="+7 (999) 999 99 99"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Электронная почта бухгалтерии" for="theAccountingEmail"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!AccountingEmail}" id="theAccountingEmail"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Сайт ресторана" for="theWebsite"/>
+                            </td>
+                            <td>
+                                <apex:input value="{!Website}" id="theWebsite"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Адрес для корреспонденции"/>
+                            </td>
+                            <td>
+                                <apex:inputCheckbox value="{!value}" id="theValue"/>
+                                <apex:outputLabel style="font-size: 12px;" value="Совпадает с юридическим"
+                                                  for="theValue"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel for="BillingIndex" value="Индекс"/>
+                            </td>
+                            <td>
+                                <apex:input id="BillingIndex" value="{!BillingIndexStr}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel for="BillingCity" value="Город"/>
+                            </td>
+                            <td>
+                                <apex:inputText id="BillingCity" value="{!BillingCityStr}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel for="BillingAddress" value="Адрес"/>
+                            </td>
+                            <td>
+                                <apex:inputText id="BillingAddress" value="{!BillingAddressStr}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Имя подписанта в именительным падеже" for="theSignerName"/>
+                            </td>
+                            <td>
+                                <apex:inputText value="{!SignerName}" id="theSignerName"
+                                                style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputLabel value="Должность подписанта" for="theSignerPosition"/>
+                            </td>
+                            <td>
+                                <apex:inputText value="{!SignerPosition}" id="theSignerPosition"
+                                                style="pointer-events:none; color:#AAA; background:#F5F5F5;"/>
+                            </td>
+                        </tr>
+                    </table>
+                </apex:pageBlock>
+            </div>
+            <div class="footer">
+                <apex:inputCheckbox value="{!valueForYes}" id="theForYes"/>
+                Подтверждаю свое ознакомление и соглашаюсь с условиями
+                <div class="button">
+                    <!-- <apex:actionRegion > -->
+                    <apex:commandButton styleClass="yel-but" action="{!save}" value="Отправить"
+                                        id="theButton"/>   <!-- reRender="block" -->
+                    <!-- </apex:actionRegion> -->
                 </div>
-                <apex:pageMessages />
-            </apex:pageBlock>
+                <apex:outputLabel>© 2019 Яндекс</apex:outputLabel>
+            </div>
+            <apex:pageMessages/>
+
+
         </div>
     </apex:form>
 </apex:page>
