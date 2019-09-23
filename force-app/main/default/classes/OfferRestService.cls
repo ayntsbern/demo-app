@@ -12,8 +12,7 @@ global with sharing class OfferRestService {
 
     @HttpPost
     global static Offer__c getOfferStatus(String Id) {
-        Offer__c offer = [SELECT Id, RestName__c, Status__c FROM Offer__c WHERE Id =: Id];
+        return [SELECT Id, RestName__c, Status__c FROM Offer__c WHERE Id =: Id];
         //return JSON.serialize(offer);
-        return offer;
     }
 }
